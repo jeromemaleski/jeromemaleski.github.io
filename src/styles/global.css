@@ -1,0 +1,81 @@
+/* One column, readable type, light and dark. Edit the variables to restyle. */
+:root {
+  --bg: #fdfcf9;
+  --text: #222;
+  --muted: #6b6b6b;
+  --link: #1f5f8b;
+  --rule: #ddd;
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Charter, Georgia, serif;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --measure: 38rem;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #17181a;
+    --text: #e6e4df;
+    --muted: #9a9893;
+    --link: #8ab8de;
+    --rule: #333;
+  }
+}
+
+* { box-sizing: border-box; }
+html { font-size: 18px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  line-height: 1.6;
+}
+main {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 4rem 1rem 5rem;
+}
+
+h1, h2, h3 { font-family: var(--serif); font-weight: 600; line-height: 1.25; text-wrap: balance; }
+h1 { font-size: 2rem; margin: 0 0 1.25rem; }
+h2 { font-size: 1.35rem; margin: 2.75rem 0 0.75rem; }
+h3 { font-size: 1.05rem; margin: 2rem 0 0.5rem; }
+p, li { text-wrap: pretty; }
+p { margin: 0 0 1rem; }
+
+a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 0.15em; }
+a:hover { text-decoration-thickness: 2px; }
+
+.muted, .meta, .back, .date, .draft { color: var(--muted); }
+.meta { font-size: 0.9rem; margin-top: -0.75rem; margin-bottom: 2rem; }
+.back { font-size: 0.9rem; margin-bottom: 2rem; }
+.back a { color: inherit; }
+
+/* Inline link list under the bio */
+.links { list-style: none; padding: 0; margin: 1.5rem 0 0; display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; }
+
+/* Post list: date on the left, title on the right */
+.posts { border-collapse: collapse; width: 100%; }
+.posts td { padding: 0.3rem 0; vertical-align: baseline; }
+.posts .date { width: 7.5rem; font-size: 0.9rem; white-space: nowrap; padding-right: 1rem; }
+.rss { font-family: var(--sans); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.05em; vertical-align: middle; margin-left: 0.4rem; }
+
+/* Section break in posts: a fleuron instead of a line */
+hr { border: 0; text-align: center; margin: 2.5rem 0; }
+hr::after { content: "❦"; color: var(--muted); font-size: 1.2rem; }
+
+/* Asides: use <aside> or a blockquote for tangents (no footnotes) */
+aside, blockquote { margin: 1.5rem 0; padding: 0 0 0 1rem; border-left: 3px solid var(--rule); color: var(--muted); }
+
+img { max-width: 100%; height: auto; }
+.hero { display: block; width: 100%; margin: 2rem 0 0; border-radius: 6px; }
+code { font-size: 0.9em; }
+pre { overflow-x: auto; padding: 0.75rem 1rem; border: 1px solid var(--rule); border-radius: 4px; font-size: 0.85rem; line-height: 1.45; }
+article ul, article ol { padding-left: 1.25rem; }
+
+.post-nav { display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--rule); font-size: 0.9rem; }
+
+@media (max-width: 30rem) {
+  html { font-size: 17px; }
+  main { padding-top: 2.5rem; }
+  .posts .date { width: 6.5rem; }
+}

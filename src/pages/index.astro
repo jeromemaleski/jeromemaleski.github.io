@@ -1,0 +1,58 @@
+---
+import Base from '../layouts/Base.astro';
+import { Image } from 'astro:assets';
+import { getPosts, formatDate } from '../lib/posts';
+import headshot from '../assets/jerome_self.png';
+const posts = await getPosts();
+---
+<Base title="Jerome Maleski">
+  <h1>Jerome Maleski</h1>
+
+  <p>
+    I'm a data scientist and <strong>research scholar in Electrical &amp; Computer Engineering at North Carolina State University</strong>,
+    working with the Optical Sensing Lab, the EnBiSys Research Lab, and the Plant Phenomics Lab.
+  </p>
+  <p>
+    I build tools that turn images and breeding data into answers: computer vision that measures sweetpotatoes
+    from the field to the packing line, and LLM agents that let plant breeders query their databases in plain language.
+    I'm Co-PD on the USDA-NIFA <em>Agentic AI Breeding Assistant</em> project.
+  </p>
+  <p>
+    Before NC State I worked on drone-based phenotyping at the University of Georgia and on crop water and carbon
+    balance at USDA-ARS. I have a Ph.D. in Agricultural and Biological Engineering from the University of Florida.
+  </p>
+
+  <ul class="links">
+    <li><a href="https://scholar.google.com/citations?user=3DAqBMcAAAAJ&amp;hl=en">Google Scholar</a></li>
+    <li><a href="https://github.com/jeromemaleski">GitHub</a></li>
+    <li><a href="https://www.linkedin.com/in/jeromemaleski/">LinkedIn</a></li>
+    <li><a href="https://orcid.org/0000-0002-2098-9691">ORCID</a></li>
+    <!-- Add a CV: put cv.pdf in /public and uncomment the next line. -->
+    <!-- <li><a href="/cv.pdf">CV (PDF)</a></li> -->
+  </ul>
+
+  <Image
+    class="hero"
+    src={headshot}
+    alt="Jerome Maleski outdoors, with a mountain behind him"
+    widths={[400, 800, 1200]}
+    sizes="(max-width: 38rem) 100vw, 38rem"
+    loading="eager"
+  />
+
+  <h2>Writing <a class="rss" href="/rss.xml" title="RSS feed">RSS</a></h2>
+  {posts.length === 0 ? (
+    <p class="muted">Nothing yet.</p>
+  ) : (
+    <table class="posts">
+      <tbody>
+        {posts.map((p) => (
+          <tr>
+            <td class="date"><time datetime={p.data.date.toISOString()}>{formatDate(p.data.date)}</time></td>
+            <td><a href={`/posts/${p.id}/`}>{p.data.title}</a>{p.data.draft && <span class="draft"> (draft)</span>}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  )}
+</Base>
